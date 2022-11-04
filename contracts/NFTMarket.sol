@@ -56,7 +56,5 @@ contract NFTMarket is ReentrancyGuard {
 
         _itemIds.increment();
         uint itemId = _itemIds.current();
-
-        
     }
 }
