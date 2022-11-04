@@ -94,7 +94,6 @@ contract NFTMarket is ReentrancyGuard {
         nonReentrant{
             uint price = idMarketItem[itemId].price;
             uint tokenId = idMarketItem[itemId].tokenId;
-
             requirer(msg.value== price,"Please pay the exact price in order to complete the purchase");
     }
 }
