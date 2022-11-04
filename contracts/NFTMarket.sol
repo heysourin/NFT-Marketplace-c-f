@@ -43,6 +43,7 @@ contract NFTMarket is ReentrancyGuard {
         return listingPrice;
     }
 
+    //Function to create market item
     function createMasrketItem(
         address nftContract,
         uint tokenId,
@@ -84,5 +85,16 @@ contract NFTMarket is ReentrancyGuard {
             price,
             false
         );
+    }
+
+    // Function to create a sale
+    function createMarketSale(address nftContract, uint itemId)
+        public
+        payable
+        nonReentrant{
+            uint price = idMarketItem[itemId].price;
+            uint tokenId = idMarketItem[itemId].tokenId;
+
+            requirer(msg.value== price,"Please pay the exact price in order to complete the purchase");
     }
 }
