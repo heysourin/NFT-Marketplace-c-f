@@ -56,5 +56,33 @@ contract NFTMarket is ReentrancyGuard {
 
         _itemIds.increment();
         uint itemId = _itemIds.current();
+
+        idMarketItem[itemId] = MarketItem(
+            itemId,
+            nftContract,
+            tokenId,
+            payable(msg.sender), // Seller, putting the nft for sell
+            payable(address(0)), //No owner yet
+            price,
+            false
+        );
+
+        /// @dev Transferring nft ownership to the contract for this time being
+        /// @param address of the nft contract
+        IERC721(nftContract).safeTransferFrom(
+            msg.sender,
+            address(this),
+            tokenId
+        );
+
+        emit MarketItemCreated(
+            itemId,
+            nftContract,
+            tokenId,
+            msg.sender,
+            address(0),
+            price,
+            false
+        );
     }
 }
