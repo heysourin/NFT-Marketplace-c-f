@@ -87,6 +87,7 @@ contract NFTMarket is ReentrancyGuard {
         );
     }
 
+
     // Function to create a sale
     function createMarketSale(address nftContract, uint itemId)
         public
@@ -94,6 +95,7 @@ contract NFTMarket is ReentrancyGuard {
         nonReentrant{
             uint price = idMarketItem[itemId].price;
             uint tokenId = idMarketItem[itemId].tokenId;
+            
             requirer(msg.value== price,"Please pay the exact price in order to complete the purchase");
     }
 }
