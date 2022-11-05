@@ -43,8 +43,15 @@ contract NFTMarket is ReentrancyGuard {
         return listingPrice;
     }
 
+    function setListingPrice(uint _price) public view returns (uint) {
+        if (msg.sender == address(this)) {
+            listingPrice = _price;
+        }
+        return listingPrice;
+    }
+
     //Function to create market item
-    function createMasrketItem(
+    function createMarketItem(
         address nftContract,
         uint tokenId,
         uint price
@@ -169,7 +176,6 @@ contract NFTMarket is ReentrancyGuard {
         return items;
     }
 
-
     function fetchItemsCreated() public view returns () {
         uint totalItemsCount = _itemIds.current();
         int itemCount = 0;
@@ -194,5 +200,5 @@ contract NFTMarket is ReentrancyGuard {
             }
         }
         return items;
-    }   
+    }
 }
